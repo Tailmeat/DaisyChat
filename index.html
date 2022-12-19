@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>채팅</title>
+
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div id="chatContent" class="chatContent">
+        <div class="line">
+            <span class="chat">Hi, I'm your AI friend!</span>
+        </div>
+    </div>
+    <input class="chat" id="input">
+    <button id="send">↵</button>
+
+    <script type="module">
+        import { Configuration, OpenAIApi } from "https://cdn.skypack.dev/openai"
+
+        const configuration = new Configuration({
+            apiKey: "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",
+        });
+
+        const openai = new OpenAIApi(configuration);
+
+        function sendChat() {
+            if (document.getElementById('input').value != "") {
+                var template =
+                    `<div class="line">
+                <span class="chat myChat">${document.querySelector("#input").value}</span>
+                </div>`
+                document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
+
+                openai.createCompletion({
+                    model: "text-davinci-003",
+                    prompt: document.querySelector("#input").value,
+                    temperature: 0.9,
+                    max_tokens: 64,
+                    top_p: 1,
+                    frequency_penalty: 0,
+                    presence_penalty: 0,
+                }).then((result) => {
+                    console.log(result.data)
+                    console.log(result.data.choices[0].text)
+                    var template =
+                        `<div class="line">
+                    <span class="chat">${result.data.choices[0].text}</span>
+                </div>`
+                    document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
+                    document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                })
+                document.getElementById("input").value = "";
+
+                document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+            }
+        }
+
+        window.addEventListener("keydown", e => {
+            if (e.key == "Enter") {
+                sendChat();
+            }
+        })
+
+        document.querySelector("#send").addEventListener("click", function () {
+            sendChat();
+        })
+    </script>
+</body>
+
+</html>

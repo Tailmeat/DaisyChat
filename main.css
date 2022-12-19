@@ -1,0 +1,52 @@
+#chatContent {
+    margin-left: calc(50% - 200px);
+    width: 400px;
+    height: 500px; overflow-y: scroll;
+}
+
+#chatContent::-webkit-scrollbar {
+    display: none;
+}
+
+.line {
+    margin-top: 10px; display: flex;
+}
+
+.chat:not(#input) {
+    background: #eee; padding: 5px; max-width: 200px;
+    border-radius: 10px;
+}
+
+.myChat {
+    margin-left: auto;
+}
+
+#input {
+    width: 342px;
+    height: auto;
+    font-size: 15px;
+    margin-left: calc(50% - 200px);
+}
+
+#send {
+    width: 45px;
+    height: 30px;
+}
+
+@media (max-width: 1000px) {
+    #chatContent {
+        margin-left: calc(50% - 175px);
+        width: 350px;
+    }
+
+    #input {
+        width: 282px;
+        margin-left: calc(50% - 150px);
+    }
+
+    #send {
+        width: 30px;
+        height: 30px;
+    }
+
+}
