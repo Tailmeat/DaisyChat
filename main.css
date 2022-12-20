@@ -1,7 +1,10 @@
 #chatContent {
+    background-color: #c3ffff;
+    border-radius: 10px;
     margin-left: calc(50% - 200px);
     width: 400px;
     height: 500px; overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 #chatContent::-webkit-scrollbar {
@@ -12,25 +15,56 @@
     margin-top: 10px; display: flex;
 }
 
+.profile {
+    background-color: rgb(255, 255, 255);
+    margin-left: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+}
+
 .chat:not(#input) {
     background: #eee; padding: 5px; max-width: 200px;
+    margin-bottom: 10px;
     border-radius: 10px;
+}
+
+.chat:not(.myChat) {
+    margin-left: 5px;
 }
 
 .myChat {
     margin-left: auto;
+    margin-right: 5px;
 }
 
 #input {
     width: 342px;
-    height: auto;
+    height: 40px;
     font-size: 15px;
+    margin-top: 5px;
     margin-left: calc(50% - 200px);
+    background-color: #eee;
+    border: none;
+    border-radius: 10px;
 }
 
 #send {
-    width: 45px;
-    height: 30px;
+    background-color: rgb(210, 210, 210);
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.copyright {
+    margin-left: calc(50% - 136.65px);
+    margin-bottom: 50px;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
 }
 
 @media (max-width: 1000px) {
@@ -40,7 +74,8 @@
     }
 
     #input {
-        width: 282px;
+        width: 270px;
+        margin-top: 10px;
         margin-left: calc(50% - 150px);
     }
 

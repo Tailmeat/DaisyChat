@@ -13,11 +13,14 @@
 <body>
     <div id="chatContent" class="chatContent">
         <div class="line">
-            <span class="chat">Hi, I'm your AI friend!</span>
+            <div class="profile"></div>
+            <span class="chat">Hello my friend!</span>
         </div>
     </div>
-    <input class="chat" id="input">
-    <button id="send">↵</button>
+    <input placeholder="메세지 보내기..." class="chat" id="input">
+    <div id="send">↵</div>
+
+    <div class="copyright">ⓒ 2022. TaiLmEaT All rights reserved.</div>
 
     <script type="module">
         import { Configuration, OpenAIApi } from "https://cdn.skypack.dev/openai"
@@ -27,6 +30,7 @@
         });
 
         const openai = new OpenAIApi(configuration);
+        var chattings = '';
 
         function sendChat() {
             if (document.getElementById('input').value != "") {
@@ -38,13 +42,13 @@
 
                 openai.createCompletion({
                     model: "text-davinci-003",
-                    prompt: document.querySelector("#input").value,
+                    prompt: `${chattings}You: ${document.querySelector("#input").value}\nFriend: `,
                     temperature: 0.5,
                     max_tokens: 60,
-                    top_p: 1.0,
+                    top_p: 1,
                     frequency_penalty: 0.5,
-                    presence_penalty: 0.0,
-
+                    presence_penalty: 0,
+                    stop: "\nYou",
                 }).then((result) => {
                     console.log(result.data)
                     console.log(result.data.choices[0].text)
@@ -54,6 +58,7 @@
                 </div>`
                     document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
                     document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                    chattings += `You: ${document.querySelector("#input").value}\nFriend: ${result.data.choices[0].text}\n`
                 })
                 document.getElementById("input").value = "";
 
