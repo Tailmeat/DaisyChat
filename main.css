@@ -39,11 +39,11 @@
 }
 
 #input {
-    width: 342px;
+    width: 350px;
     height: 40px;
     font-size: 15px;
     margin-top: 5px;
-    margin-left: calc(50% - 200px);
+    margin-left: none;
     background-color: #eee;
     border: none;
     border-radius: 10px;
@@ -59,13 +59,13 @@
     text-align: center;
 }
 
-.copyright {
+/* .copyright {
     margin-left: calc(50% - 136.65px);
     margin-bottom: 50px;
     position: fixed;
     bottom: 0;
     text-align: center;
-}
+} */
 
 @media (max-width: 1000px) {
     #chatContent {

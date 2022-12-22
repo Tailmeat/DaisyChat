@@ -20,7 +20,7 @@
     <input placeholder="메세지 보내기..." class="chat" id="input">
     <div id="send">↵</div>
 
-    <div class="copyright">ⓒ 2022. TaiLmEaT All rights reserved.</div>
+    <!-- <div class="copyright">ⓒ 2022. TaiLmEaT All rights reserved.</div> -->
 
     <script type="module">
         import { Configuration, OpenAIApi } from "https://cdn.skypack.dev/openai"
@@ -42,7 +42,7 @@
 
                 openai.createCompletion({
                     model: "text-davinci-003",
-                    prompt: `${chattings}You: ${document.querySelector("#input").value}\nFriend: `,
+                    prompt: `${chattings}You: ${document.querySelector("#input").value}\nDaisy: `,
                     temperature: 0.5,
                     max_tokens: 60,
                     top_p: 1,
@@ -58,7 +58,7 @@
                 </div>`
                     document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
                     document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
-                    chattings += `You: ${document.querySelector("#input").value}\nFriend: ${result.data.choices[0].text}\n`
+                    chattings += `You: ${document.querySelector("#input").value}\nDaisy: ${result.data.choices[0].text}\n`
                 })
                 document.getElementById("input").value = "";
 
