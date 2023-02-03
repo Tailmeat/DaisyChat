@@ -20,14 +20,14 @@
             <span class="chat">Hello my friend!</span>
         </div>
     </div>
-    
+
     <input placeholder="메세지 보내기..." class="chat" id="input">
     <div id="send"><ion-icon name="paper-plane-outline"></ion-icon></div>
 
     <!-- <div class="copyright">ⓒ 2022. TaiLmEaT All rights reserved.</div> -->
 
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <script type="module">
         import { Configuration, OpenAIApi } from "https://cdn.skypack.dev/openai"
@@ -40,14 +40,34 @@
         var chattings = '';
 
         function sendChat() {
-            if (document.getElementById('input').value != "") {
+            if (document.getElementById('input').value != "") {                                   //입력한 값이 빈 공간이 아니라면 실행
                 var template =
                     `<div class="line">
                 <span class="chat myChat">${document.querySelector("#input").value}</span>
                 </div>`
                 document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
 
-                openai.createCompletion({
+                var getSlash = document.getElementById("input").value.split("");
+                if (getSlash[0] == "/") {
+                    getSlash.shift();
+                    var imageCommand = getSlash.join("");
+                    openai.createImage({
+                    prompt: `${imageCommand}`,
+                    n: 1,
+                    size: "1024x1024",
+                }).then((result) => {
+                    console.log(result.data.data[0].url);
+                    var template =
+                        `<div class="line">
+                        <div class="profile"><img src="Daisy.png"></div>
+                    <span class="chat"><img width="200px" height="200px" src="${result.data.data[0].url}"></span>
+                </div>`
+                    document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
+                    document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                });
+                }
+                else{
+                    openai.createCompletion({
                     model: "text-davinci-003",
                     prompt: `${chattings}You: ${document.querySelector("#input").value}\Daisy: `,
                     temperature: 0.5,
@@ -68,6 +88,8 @@
                     document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
                     chattings += `You: ${document.querySelector("#input").value}\nDaisy: ${result.data.choices[0].text}\n`
                 })
+                }
+                
                 document.getElementById("input").value = "";
 
                 document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
