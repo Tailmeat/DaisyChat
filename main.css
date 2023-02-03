@@ -1,11 +1,17 @@
+body {
+    background-color: rgb(144, 164, 145)
+}
+
 #chatContent {
-    background-color: rgb(255, 220, 19);
-    border-radius: 10px;
+    padding-bottom: 50px;
+    background-color: rgba(233, 252, 232, 0.613);
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    border-radius: 20px;
+    margin-top: 100px;
     margin-left: calc(50% - 200px);
     width: 400px;
-    height: 600px; overflow-y: scroll;
+    height: 530px; overflow-y: scroll;
     overflow-x: hidden;
-    margin-top: 15px;
 }
 
 #chatContent::-webkit-scrollbar {
@@ -16,66 +22,69 @@
     margin-top: 10px; display: flex;
 }
 
-.background {
-    position: absolute;
-    margin-left: calc(50% - 213px);
-    background-color: black;
-    border-radius: 10px;
-    width: 410px;
-    height: 660px;
-    z-index: -1;
-    margin-top: -6px;
-}
-
 .profile img {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     margin-left: 5px;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 38px;
+    height: 38px;
 }
 
 .chat:not(#input) {
-    background: #eee; padding: 5px; max-width: 200px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 5px; max-width: 200px;
+    padding: 8px;
     margin-bottom: 10px;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
 .chat:not(.myChat) {
     margin-left: 5px;
 }
 
+.chat:not(#input):not(.myChat) {
+    background-color: rgb(255, 255, 255);
+}
+
 .myChat {
+    background-color: #eee;
     margin-left: auto;
-    margin-right: 5px;
+    margin-right: 10px;
 }
 
 #input {
-    width: 340px;
-    height: 40px;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    padding-left: 15px;
+    position: absolute;
+    width: 383px;
+    height: 50px;
     font-size: 15px;
-    margin-top: 5px;
-    margin-left: calc(50% - 200px);
+    margin-top: -52px;
+    margin-left: calc(50% - 208px);
     background-color: #eee;
     border: none;
-    border-radius: 10px;
+    border-radius: 20px;
 }
 
+#input:focus {outline: none;}
+
 #send {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     position: absolute;
-    margin-top: -41px;
-    margin-left: calc(50% + 140px);
-    background-color: rgb(210, 210, 210);
-    width: 50px;
-    height: 40px;
+    margin-top: -49px;
+    margin-left: calc(50% + 142px);
+    background-color: rgb(255, 221, 50);
+    width: 45px;
+    height: 45px;
     border: none;
-    border-radius: 10px;
+    border-radius: 50%;
     cursor: pointer;
     text-align: center;
 }
 
 #send ion-icon {
     font-size: 20px;
-    margin-top: 10px;
+    margin-top: 14px;
 }
 
 /* .copyright {
