@@ -1,5 +1,11 @@
 body {
-    background-color: rgb(144, 164, 145)
+    background-color: rgb(144, 164, 145);
+    font-family: "nanum";
+}
+
+@font-face {
+    font-family: "nanum";
+    src: url(nanum.ttf);
 }
 
 #chatContent {
