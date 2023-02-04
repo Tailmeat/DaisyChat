@@ -5,14 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>채팅</title>
+    <meta property="og:title" content="[데이지 채팅]" />
+    <meta property="og:url" content="https://daisychat.netlify.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="preview.png" />
+    <meta property="og:title" content="[데이지 채팅]" />
+    <meta property="og:description" content="인공지능 챗봇 데이지와 함께 대화해보세요! " />
+
+    <title>데이지 채팅</title>
 
     <link rel="stylesheet" href="main.css">
 </head>
 
 <body>
 
-    <div class="background"></div>
+    <div class="nameTag"><img src="Daisy.png"><div class="green"></div><span class="namae"><b>Daisy</b><br><span class="current">지금 활동 중</span></div>
 
     <div id="chatContent" class="chatContent">
         <div class="line">
@@ -52,44 +59,44 @@
                     getSlash.shift();
                     var imageCommand = getSlash.join("");
                     openai.createImage({
-                    prompt: `${imageCommand}`,
-                    n: 1,
-                    size: "1024x1024",
-                }).then((result) => {
-                    console.log(result.data.data[0].url);
-                    var template =
-                        `<div class="line">
+                        prompt: `${imageCommand}`,
+                        n: 1,
+                        size: "1024x1024",
+                    }).then((result) => {
+                        console.log(result.data.data[0].url);
+                        var template =
+                            `<div class="line">
                         <div class="profile"><img src="Daisy.png"></div>
                     <span class="chat"><img width="200px" height="200px" src="${result.data.data[0].url}"></span>
                 </div>`
-                    document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
-                    document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
-                });
+                        document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
+                        document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                    });
                 }
-                else{
+                else {
                     openai.createCompletion({
-                    model: "text-davinci-003",
-                    prompt: `${chattings}You: ${document.querySelector("#input").value}\Daisy: `,
-                    temperature: 0.5,
-                    max_tokens: 60,
-                    top_p: 1,
-                    frequency_penalty: 0.5,
-                    presence_penalty: 0,
-                    stop: "\nYou",
-                }).then((result) => {
-                    console.log(result.data)
-                    console.log(result.data.choices[0].text)
-                    var template =
-                        `<div class="line">
+                        model: "text-davinci-003",
+                        prompt: `${chattings}You: ${document.querySelector("#input").value}\Daisy: `,
+                        temperature: 0.5,
+                        max_tokens: 60,
+                        top_p: 1,
+                        frequency_penalty: 0.5,
+                        presence_penalty: 0,
+                        stop: "\nYou",
+                    }).then((result) => {
+                        console.log(result.data)
+                        console.log(result.data.choices[0].text)
+                        var template =
+                            `<div class="line">
                         <div class="profile"><img src="Daisy.png"></div>
                     <span class="chat">${result.data.choices[0].text}</span>
                 </div>`
-                    document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
-                    document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
-                    chattings += `You: ${document.querySelector("#input").value}\nDaisy: ${result.data.choices[0].text}\n`
-                })
+                        document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
+                        document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                        chattings += `You: ${document.querySelector("#input").value}\nDaisy: ${result.data.choices[0].text}\n`
+                    })
                 }
-                
+
                 document.getElementById("input").value = "";
 
                 document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;

@@ -1,4 +1,5 @@
 body {
+    margin: 0;
     background-color: rgb(144, 164, 145);
     font-family: "nanum";
 }
@@ -9,6 +10,7 @@ body {
 }
 
 #chatContent {
+    padding-top: 50px;
     padding-bottom: 50px;
     background-color: rgba(233, 252, 232, 0.613);
     box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -16,7 +18,7 @@ body {
     margin-top: 100px;
     margin-left: calc(50% - 200px);
     width: 400px;
-    height: 530px; overflow-y: scroll;
+    height: 430px; overflow-y: scroll;
     overflow-x: hidden;
 }
 
@@ -52,6 +54,11 @@ body {
     background-color: rgb(255, 255, 255);
 }
 
+.chat img {
+    margin-top: 4px;
+    border-radius: 20px;
+}
+
 .myChat {
     background-color: #eee;
     margin-left: auto;
@@ -66,7 +73,7 @@ body {
     height: 50px;
     font-size: 15px;
     margin-top: -52px;
-    margin-left: calc(50% - 208px);
+    margin-left: calc(50% - 200px);
     background-color: #eee;
     border: none;
     border-radius: 20px;
@@ -75,10 +82,10 @@ body {
 #input:focus {outline: none;}
 
 #send {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;
     position: absolute;
     margin-top: -49px;
-    margin-left: calc(50% + 142px);
+    margin-left: calc(50% + 150px);
     background-color: rgb(255, 221, 50);
     width: 45px;
     height: 45px;
@@ -88,9 +95,57 @@ body {
     text-align: center;
 }
 
+#send:hover {
+    background-color: rgb(243, 210, 47);
+}
+
+#send:active {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
 #send ion-icon {
     font-size: 20px;
     margin-top: 14px;
+}
+
+.nameTag {
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    position: absolute;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    background-color: #EEEEEE;
+    width: 400px;
+    height: 50px;
+    margin-left: calc(50% - 200px);
+}
+
+.nameTag img {
+    position: absolute;
+    margin-left: 7px;
+    margin-top: 7px;
+    border-radius: 50%;
+    width: 35px;
+}
+
+.green {
+    margin-top: 30px;
+    margin-left: 30px;
+    position: absolute;
+    border: 2px solid #EEEEEE;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    background-color: rgb(53, 224, 53);
+  }
+
+.namae {
+    margin-top: 10px;
+    margin-left: 50px;
+    position: absolute;
+}
+
+.current {
+    font-size: 13px;
 }
 
 @media (max-width: 1000px) {
@@ -105,31 +160,4 @@ body {
     position: fixed;
     bottom: 0;
     text-align: center;
-} */
-
-/* @media (max-width: 1000px) {
-    #chatContent {
-        margin-top: 15px;
-        margin-left: calc(50% - 175px);
-        width: 350px;
-        height: 500px;
-    }
-
-    #input {
-        width: 290px;
-        margin-top: 5px;
-        margin-left: calc(50% - 175px);
-    }
-
-    #send {
-        margin-left: calc(50% + 115px);
-    }
-
-    .background {
-        margin-top: -5px;
-        margin-left: calc(50% - 188px);
-        width: 360px;
-        height: 557px;
-    }
-
 } */
