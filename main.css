@@ -87,6 +87,12 @@ body {
     margin-top: 14px;
 }
 
+@media (max-width: 1000px) {
+    body {
+        zoom: 0.8;
+    }
+}
+
 /* .copyright {
     margin-left: calc(50% - 136.65px);
     margin-bottom: 50px;
@@ -95,7 +101,7 @@ body {
     text-align: center;
 } */
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
     #chatContent {
         margin-top: 15px;
         margin-left: calc(50% - 175px);
@@ -120,4 +126,4 @@ body {
         height: 557px;
     }
 
-}
+} */
