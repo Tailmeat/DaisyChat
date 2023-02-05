@@ -22,9 +22,12 @@
 </head>
 
 <body>
-    
+
     <div id="bg">
-        <div class="popTitle"><div><span class="version">v1.0 </span><b>데이지 설명서</b></div><span id="close"><ion-icon name="close-circle-outline"></ion-icon></span></div>
+        <div class="popTitle">
+            <div><span class="version">v1.0 </span><b>데이지 설명서</b></div><span id="close"><ion-icon
+                    name="close-circle-outline"></ion-icon></span>
+        </div>
         <div id="popup">
             <div class="popDescription">
                 <div class="whiteBox">
@@ -45,14 +48,18 @@
                 </div>
                 <div class="whiteBox">
                     <b><span>Q</span> 데이지가 대답을 안해요.</b>
-                    <p><a href=" https://open.kakao.com/o/ssL9fL2e"><span class="kakaotalk"><iconify-icon icon="vs:kakaotalk"></iconify-icon>카카오톡</span></a>으로 문의해주시면 최대한 빠르게<br>고쳐드리겠습니다.</p>
+                    <p><a href=" https://open.kakao.com/o/ssL9fL2e"><span class="kakaotalk"><iconify-icon
+                                    icon="vs:kakaotalk"></iconify-icon>카카오톡</span></a>으로 문의해주시면 최대한 빠르게<br>고쳐드리겠습니다.</p>
                 </div>
-                <div class="copyright"><a href="https://github.com/Tailmeat/DaisyChat">ⓒ 2022-2023. <b> TaiLmEaT</b> All rights reserved.</a></div>
+                <div class="copyright"><a href="https://github.com/Tailmeat/DaisyChat">ⓒ 2022-2023. <b> TaiLmEaT</b> All
+                        rights reserved.</a></div>
             </div>
         </div>
     </div>
 
-    <div class="nameTag"><img src="Daisy.png"><div class="green"></div><span class="namae"><b>Daisy</b><br><span class="current">지금 활동 중</span></div>
+    <div class="nameTag"><img src="Daisy.png">
+        <div class="green"></div><span class="namae"><b>Daisy</b><br><span class="current">지금 활동 중</span>
+    </div>
     <div id="help"><ion-icon name="help-circle-outline"></ion-icon></div>
 
     <div id="chatContent" class="chatContent">
@@ -74,16 +81,40 @@
 
     <script type="module">
 
-        document.getElementById("help").onclick = function() {
+        var sent = false;
+        var sendingIndex = 1;
+
+        function sending() {
+            if (!sent) {
+                setTimeout(() => {
+                    sendingIndex ++;
+                    if (sendingIndex == 4) {
+                        sendingIndex = 1;
+                    }
+                    if (sendingIndex == 1) {
+                        document.getElementsByClassName("sendResult")[document.getElementsByClassName("sendResult").length - 1].innerHTML = '입력 중.'
+                    }
+                    if (sendingIndex == 2) {
+                        document.getElementsByClassName("sendResult")[document.getElementsByClassName("sendResult").length - 1].innerHTML = '입력 중..'
+                    }
+                    if (sendingIndex == 3) {
+                        document.getElementsByClassName("sendResult")[document.getElementsByClassName("sendResult").length - 1].innerHTML = '입력 중...'
+                    }
+                    sending()
+                }, 200)
+            }
+        }
+
+        document.getElementById("help").onclick = function () {
             document.getElementById("popup").style.display = "block";
             document.getElementById("bg").style.display = "block";
         }
 
-        document.getElementById("close").onclick = function() {
+        document.getElementById("close").onclick = function () {
             document.getElementById("popup").style.display = "none";
             document.getElementById("bg").style.display = "none";
         }
-        
+
         import { Configuration, OpenAIApi } from "https://cdn.skypack.dev/openai"
 
         const configuration = new Configuration({
@@ -101,6 +132,20 @@
                 </div>`
                 document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
 
+                sent = false;
+
+                
+                setTimeout(() => {
+                    var template =
+                    `<div class="line">
+                        <div class="profile"><img src="Daisy.png"></div>
+                        <span class="chat"><div class="sendResult">입력 중.</div></span>
+                        </div>`
+                        document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
+                        document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                        sending()
+                }, 500)
+
                 var getSlash = document.getElementById("input").value.split("");
                 if (getSlash[0] == "/") {
                     getSlash.shift();
@@ -111,13 +156,17 @@
                         size: "1024x1024",
                     }).then((result) => {
                         console.log(result.data.data[0].url);
-                        var template =
-                            `<div class="line">
-                        <div class="profile"><img src="Daisy.png"></div>
-                    <span class="chat"><img width="200px" height="200px" src="${result.data.data[0].url}"></span>
-                </div>`
-                        document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
-                        document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                        //         var template =
+                        //             `<div class="line">
+                        //         <div class="profile"><img src="Daisy.png"></div>
+                        //     <span class="chat"><img width="200px" height="200px" src="${result.data.data[0].url}"></span>
+                        // </div>`
+                        //         document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
+                        sent = true;
+                        setTimeout (() => {
+                            document.getElementsByClassName("sendResult")[document.getElementsByClassName("sendResult").length - 1].innerHTML = `<img width="200px" height="200px" src="${result.data.data[0].url}">`
+                            document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                        }, 300)
                     });
                 }
                 else {
@@ -133,13 +182,18 @@
                     }).then((result) => {
                         console.log(result.data)
                         console.log(result.data.choices[0].text)
-                        var template =
-                            `<div class="line">
-                        <div class="profile"><img src="Daisy.png"></div>
-                    <span class="chat">${result.data.choices[0].text}</span>
-                </div>`
-                        document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
-                        document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                        //         var template =
+                        //             `<div class="line">
+                        //         <div class="profile"><img src="Daisy.png"></div>
+                        //     <span class="chat">${result.data.choices[0].text}</span>
+                        // </div>`
+                        //         document.querySelector(".chatContent").insertAdjacentHTML("beforeend", template)
+
+                        sent = true;
+                        setTimeout(() => {
+                            document.getElementsByClassName("sendResult")[document.getElementsByClassName("sendResult").length - 1].innerHTML = `${result.data.choices[0].text}`
+                            document.getElementById('chatContent').scrollTop = document.getElementById('chatContent').scrollHeight;
+                        }, 300)
                         chattings += `You: ${document.querySelector("#input").value}\nDaisy: ${result.data.choices[0].text}\n`
                     })
                 }
