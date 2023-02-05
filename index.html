@@ -8,7 +8,7 @@
     <meta property="og:title" content="[데이지 채팅]" />
     <meta property="og:url" content="https://daisychat.netlify.app/" />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="" />
+    <meta property="og:image" content="preview.png" />
     <meta property="og:title" content="[데이지 채팅]" />
     <meta property="og:description" content="인공지능 챗봇 데이지와 함께 대화해보세요! " />
 
@@ -18,8 +18,38 @@
 </head>
 
 <body>
+    
+    <div id="bg">
+        <div class="popTitle"><div><span class="version">v1.0 </span><b>데이지 설명서</b></div><span id="close"><ion-icon name="close-circle-outline"></ion-icon></span></div>
+        <div id="popup">
+            <div class="popDescription">
+                <div class="whiteBox">
+                    <b><span>Q</span> 데이지는 무엇인가요?</b>
+                    <p>데이지는 OpenAI API GPT-3의 모델인<br>text-davinci-003을 이용해 만든 챗봇입니다.</p>
+                </div>
+                <div class="whiteBox">
+                    <b><span>Q</span> 이미지 생성 기능은 어떻게 사용하나요?</b>
+                    <p>"/"를 입력하고 챗을 보내면 작동합니다. 예)/unicorn in the space</p>
+                </div>
+                <div class="whiteBox">
+                    <b><span>Q</span> 비속어를 사용해도 되나요?</b>
+                    <p>비속어를 사용할 시 데이지가 잘 알아듣지<br>못할 수도 있습니다.</p>
+                </div>
+                <div class="whiteBox">
+                    <b><span>Q</span> 데이지가 한국어를 못하는 것 같아요.</b>
+                    <p>기본적으로 영어를 사용해야 원할한 의사소통이<br>가능합니다.</p>
+                </div>
+                <div class="whiteBox">
+                    <b><span>Q</span> 데이지가 대답을 안해요.</b>
+                    <p><a href=" https://open.kakao.com/o/ssL9fL2e"><span class="kakaotalk"><iconify-icon icon="vs:kakaotalk"></iconify-icon>카카오톡</span></a>으로 문의해주시면 최대한 빠르게<br>고쳐드리겠습니다.</p>
+                </div>
+                <div class="copyright"><a href="https://github.com/Tailmeat/DaisyChat">ⓒ 2022-2023. <b> TaiLmEaT</b> All rights reserved.</a></div>
+            </div>
+        </div>
+    </div>
 
     <div class="nameTag"><img src="Daisy.png"><div class="green"></div><span class="namae"><b>Daisy</b><br><span class="current">지금 활동 중</span></div>
+    <div id="help"><ion-icon name="help-circle-outline"></ion-icon></div>
 
     <div id="chatContent" class="chatContent">
         <div class="line">
@@ -31,23 +61,36 @@
     <input placeholder="메세지 보내기..." class="chat" id="input">
     <div id="send"><ion-icon name="paper-plane-outline"></ion-icon></div>
 
+
     <!-- <div class="copyright">ⓒ 2022. TaiLmEaT All rights reserved.</div> -->
 
+    <script src="https://code.iconify.design/iconify-icon/1.0.3/iconify-icon.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
     <script type="module">
+
+        document.getElementById("help").onclick = function() {
+            document.getElementById("popup").style.display = "block";
+            document.getElementById("bg").style.display = "block";
+        }
+
+        document.getElementById("close").onclick = function() {
+            document.getElementById("popup").style.display = "none";
+            document.getElementById("bg").style.display = "none";
+        }
+        
         import { Configuration, OpenAIApi } from "https://cdn.skypack.dev/openai"
 
         const configuration = new Configuration({
-            apiKey: "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",
+            apiKey: "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",
         });
 
         const openai = new OpenAIApi(configuration);
         var chattings = '';
 
         function sendChat() {
-            if (document.getElementById('input').value != "") {                                   //입력한 값이 빈 공간이 아니라면 실행
+            if (document.getElementById('input').value != "") {
                 var template =
                     `<div class="line">
                 <span class="chat myChat">${document.querySelector("#input").value}</span>
@@ -76,7 +119,7 @@
                 else {
                     openai.createCompletion({
                         model: "text-davinci-003",
-                        prompt: `${chattings}You: ${document.querySelector("#input").value}\Daisy: `,
+                        prompt: `${chattings}You: ${document.querySelector("#input").value}\Daisy(friend): `,
                         temperature: 0.5,
                         max_tokens: 60,
                         top_p: 1,
@@ -112,6 +155,7 @@
         document.querySelector("#send").addEventListener("click", function () {
             sendChat();
         })
+
     </script>
 </body>
 
